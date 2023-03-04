@@ -15,19 +15,24 @@ public class TextEditor {
 
 	public static void execute(String FileInName, String FileOutName, String operation) {
 
-		List<String> textLines = new ArrayList<>();
-
 		File inFile = new File(FileInName);
-
-		if (inFile.exists() && inFile.isFile()) {
-			try (BufferedReader br = new BufferedReader(new FileReader(inFile))) {
-				textLines = br.lines().collect(Collectors.toList());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
+		if (!inFile.exists() || !inFile.isFile()) {
 			System.out.println("File not found. Please enter correct file name");
 			return;
+		}
+		
+		File outFile = new File(FileOutName);
+		if (outFile.exists() || outFile.isDirectory()) {
+			System.out.println("The file has already been created, please enter a different file name.");
+			return;
+		}
+		
+		List<String> textLines = new ArrayList<>();
+
+		try (BufferedReader br = new BufferedReader(new FileReader(inFile))) {
+			textLines = br.lines().collect(Collectors.toList());
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		System.out.println("File: " + inFile.getPath() + " opened...");
@@ -41,31 +46,25 @@ public class TextEditor {
 			System.out.println("Wrong operation name");
 			throw new RuntimeException();
 		}
-		File outFile = new File(FileOutName);
-		if (!outFile.exists() && !outFile.isDirectory()) {
-			try (BufferedWriter bw = new BufferedWriter(new FileWriter(outFile))) {
-				textLines.forEach(line -> {
-					try {
-						bw.write(line);
-						bw.newLine();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				});
-				System.out.println("File: " + outFile.getPath() + " has been created...");
 
-			} catch (IOException e) {
-				e.printStackTrace();
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(outFile))) {
+			textLines.forEach(line -> {
+				try {
+					bw.write(line);
+					bw.newLine();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			});
+			System.out.println("File: " + outFile.getPath() + " has been created...");
 
-			}
-		} else {
-			System.out.println("The file has already been created, please enter a different file name.");
-			return;
+		} catch (IOException e) {
+			e.printStackTrace();
+
 		}
+
 		System.out.println();
 		System.out.println("The program has been successfully completed");
-		
-
 
 	}
 }
