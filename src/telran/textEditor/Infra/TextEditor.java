@@ -27,6 +27,7 @@ public class TextEditor {
 			}
 		} else {
 			System.out.println("File not found. Please enter correct file name");
+			return;
 		}
 
 		System.out.println("File: " + inFile.getPath() + " opened...");
@@ -59,6 +60,7 @@ public class TextEditor {
 			}
 		} else {
 			System.out.println("The file has already been created, please enter a different file name.");
+			return;
 		}
 		System.out.println();
 		System.out.println("The program has been successfully completed");
