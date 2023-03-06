@@ -17,13 +17,13 @@ public class TextEditor {
 
 		File inFile = new File(FileInName);
 		if (!inFile.exists() || !inFile.isFile()) {
-			System.out.println("File not found. Please enter correct file name");
+			System.out.println("FileIn not found. Please enter correct file name");
 			return;
 		}
 		
 		File outFile = new File(FileOutName);
 		if (outFile.exists() || outFile.isDirectory()) {
-			System.out.println("The file has already been created, please enter a different file name.");
+			System.out.println("The fileOut has already been created, please enter a different file name.");
 			return;
 		}
 		

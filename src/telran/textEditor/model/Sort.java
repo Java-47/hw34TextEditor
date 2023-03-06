@@ -7,9 +7,10 @@ import telran.textEditor.Infra.Operation;
 public class Sort implements Operation {
 
 	@Override
-	public void action(List<String> lines) {
+	public List<String> action(List<String> lines) {
 
 		Collections.sort(lines, String.CASE_INSENSITIVE_ORDER);
+		return lines;
 
 	}
 

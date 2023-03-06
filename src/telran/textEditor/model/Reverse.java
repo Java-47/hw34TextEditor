@@ -8,8 +8,9 @@ import telran.textEditor.Infra.Operation;
 public class Reverse implements Operation {
 
 	@Override
-	public void action(List<String> lines) {
+	public List<String> action(List<String> lines) {
 		Collections.reverse(lines);
+		return lines;
 		
 	}
 
